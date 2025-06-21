@@ -1,6 +1,79 @@
+import { useState } from "react";
 import mitolynImage from "/mitolynImage.jpg"; // adjust path as needed
 
 const MetolynLanding = () => {
+
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [email, setEmail] = useState('');
+
+console.log(email, 'email');
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData();
+  formData.append("email", email);
+
+  try {
+    const res = await fetch("https://script.google.com/macros/s/AKfycbwe2YvZ1JkaG5mDaT3b7mtIlElyqF-vP1CtZE7YRguNkqmPWvFlVpvTaRATN9s6-bJd/exec", {
+      method: "POST",
+      body: formData
+    });
+
+    if (!res.ok) throw new Error("Network response was not ok");
+
+    console.log("Success!");
+    setEmailSubmitted(true);
+  } catch (err) {
+    console.error("Failed to save email", err);
+  }
+};
+
+   if (!emailSubmitted) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-indigo-900 to-blue-900 p-4">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full">
+          <div className="text-center mb-6">
+            <div className="bg-gradient-to-r from-amber-400 to-amber-600 rounded-xl w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <span className="text-white font-bold text-xl">M</span>
+            </div>
+            <h2 className="text-2xl font-bold text-gray-800">GET EXCLUSIVE ACCESS</h2>
+            <p className="text-gray-600 mt-2">
+              Enter your email to unlock the full Metolyn experience and special offers
+            </p>
+          </div>
+          
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition"
+                placeholder="your@email.com"
+              />
+            </div>
+            
+            <button
+              type="submit"
+              className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-3 px-4 rounded-lg transition transform hover:scale-105"
+            >
+              CONTINUE TO SITE
+            </button>
+            
+            <p className="text-xs text-gray-500 text-center">
+              We respect your privacy. Your information is safe with us.
+            </p>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="font-sans bg-gradient-to-b from-gray-50 to-white text-gray-800">
       {/* Header */}
@@ -69,7 +142,7 @@ const MetolynLanding = () => {
           </nav>
 
           <button
-            className="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-6 rounded-full transition flex items-center"
+            className="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-6 rounded-full transition flex items-center cursor-pointer"
             onClick={() =>
               window.open(
                 "https://52a327dfgx1vs9ebph3b-a5nc0.hop.clickbank.net"
@@ -136,7 +209,7 @@ const MetolynLanding = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <button
-                className="bg-amber-500 hover:bg-amber-600 text-blue-900 font-bold py-3 px-6 rounded-full transition transform hover:scale-105 flex items-center"
+                className="bg-amber-500 hover:bg-amber-600 text-blue-900 font-bold py-3 px-6 rounded-full transition transform hover:scale-105 flex items-center cursor-pointer"
                 onClick={() =>
                   window.open(
                     "https://52a327dfgx1vs9ebph3b-a5nc0.hop.clickbank.net"
@@ -158,7 +231,7 @@ const MetolynLanding = () => {
                 </svg>
               </button>
               <button
-                className="bg-transparent border-2 border-white hover:bg-white hover:text-blue-900 text-white font-bold py-3 px-6 rounded-full transition"
+                className="bg-transparent border-2 border-white hover:bg-white hover:text-blue-900 text-white font-bold py-3 px-6 rounded-full transition cursor-pointer"
                 onClick={() =>
                   window.open(
                     "https://52a327dfgx1vs9ebph3b-a5nc0.hop.clickbank.net"
@@ -564,7 +637,7 @@ const MetolynLanding = () => {
                   </li>
                 </ul>
                 <button
-                  className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-4 px-8 rounded-full w-full transition transform hover:scale-105"
+                  className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-4 px-8 rounded-full w-full transition transform hover:scale-105 cursor-pointer"
                   onClick={() =>
                     window.open(
                       "https://52a327dfgx1vs9ebph3b-a5nc0.hop.clickbank.net"
@@ -609,7 +682,7 @@ const MetolynLanding = () => {
                   </li>
                 </ul>
                 <button
-                  className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-bold py-4 px-8 rounded-full w-full transition transform hover:scale-105"
+                  className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-bold py-4 px-8 rounded-full w-full transition transform hover:scale-105 cursor-pointer"
                   onClick={() =>
                     window.open(
                       "https://52a327dfgx1vs9ebph3b-a5nc0.hop.clickbank.net"
@@ -647,7 +720,7 @@ const MetolynLanding = () => {
                   </li>
                 </ul>
                 <button
-                  className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-4 px-8 rounded-full w-full transition transform hover:scale-105"
+                  className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-4 px-8 rounded-full w-full transition transform hover:scale-105 cursor-pointer"
                   onClick={() =>
                     window.open(
                       "https://52a327dfgx1vs9ebph3b-a5nc0.hop.clickbank.net"
@@ -787,7 +860,7 @@ const MetolynLanding = () => {
 
           <div className="text-center mt-16">
             <button
-              className="bg-gradient-to-r from-blue-700 to-indigo-800 hover:from-blue-800 hover:to-indigo-900 text-white font-bold py-4 px-8 rounded-full text-lg transition transform hover:scale-105"
+              className="bg-gradient-to-r from-blue-700 to-indigo-800 hover:from-blue-800 hover:to-indigo-900 text-white font-bold py-4 px-8 rounded-full text-lg transition transform hover:scale-105 cursor-pointer"
               onClick={() =>
                 window.open(
                   "https://52a327dfgx1vs9ebph3b-a5nc0.hop.clickbank.net"
